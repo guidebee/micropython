@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/axtls" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/berkeley-db-1.xx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/libffi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/lwip" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/mbedtls" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/nrfx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/stm32lib" vcs="Git" />
+  </component>
+</project>
