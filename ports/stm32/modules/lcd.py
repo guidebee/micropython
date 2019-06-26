@@ -35,7 +35,7 @@ class ILI(object):
     _rst  = object()
     _csx  = object()
     _dcx  = object()
-    portrait  = True
+    portrait  = False
 
     _tftwidth  = 240                                                           # TFT width Constant
     _tftheight = 320                                                           # TFT height Constant
@@ -44,7 +44,7 @@ class ILI(object):
     _curheight = 320                                                           # Current TFT height
 
     def __init__(self, rstPin='X3', csxPin='X4', dcxPin='X5', port=1, rate=rate,
-                chip='ILI9341', portrait=True):
+                chip='ILI9341', portrait=False):
         if ILI._cnt == 0:
             ILI._regs = regs[chip]
             ILI._spi  = SPI(port, SPI.MASTER, baudrate=rate, polarity=1, phase=1)

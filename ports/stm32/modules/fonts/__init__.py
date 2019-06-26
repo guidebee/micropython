@@ -48,6 +48,10 @@ def importing(font):
         from fonts.etypo_13 import Entypo_13 as font
     elif font == 'Entypo_23':
         from fonts.etypo_23 import Entypo_23 as font
+    elif font == 'Amstrad_8':
+        from fonts.amstrad import Amstrad_8 as font
+    elif font == 'Monospace_8':
+        from fonts.monospace import Monospace_8 as font
     else:
         font = None
     return font
