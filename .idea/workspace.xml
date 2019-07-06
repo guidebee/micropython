@@ -9,7 +9,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bab6ffc-685c-4547-b201-461736f175d0" name="Default Changelist" comment="" />
+    <list default="true" id="6bab6ffc-685c-4547-b201-461736f175d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/dht.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/lcd.py" beforeDir="false" afterPath="$PROJECT_DIR$/ports/stm32/modules/lcd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/lcd160cr.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/lcd160cr_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/onewire.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,74 +27,12 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/stm32/Makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-298">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/dfu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2171">
-              <folding>
-                <element signature="e#140#165#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/pyboard.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="232" column="31" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="25" />
-              <folding>
-                <element signature="e#2231#2241#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/insert-usb-ids.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/examples/embedding/hello-embed.c">
+        <entry file="file://$PROJECT_DIR$/ports/stm32/modules/lcd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-619" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/embedding/mpconfigport.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70">
-              <caret line="117" column="36" selection-start-line="117" selection-start-column="36" selection-end-line="117" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/embedding/Makefile">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/embedding/mpconfigport_minimal.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            <state relative-caret-position="210">
+              <caret line="21" selection-start-line="21" selection-start-column="2" selection-end-line="24" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -99,6 +44,7 @@
       <find>NameError: name</find>
       <find>dirty</find>
       <find>MODULE_EXAMPLE_ENABLED</find>
+      <find>usb</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,6 +57,7 @@
         <option value="$PROJECT_DIR$/py/makeversionhdr.py" />
         <option value="$PROJECT_DIR$/extensions/example/example.c" />
         <option value="$PROJECT_DIR$/extensions/example/micropython.mk" />
+        <option value="$PROJECT_DIR$/ports/stm32/modules/lcd.py" />
       </list>
     </option>
   </component>
@@ -125,9 +72,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-31" />
-    <option name="y" value="23" />
-    <option name="width" value="1640" />
+    <option name="x" value="-61" />
+    <option name="y" value="34" />
+    <option name="width" value="1633" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -136,12 +83,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="micropython" type="b2602c69:ProjectViewProjectNode" />
               <item name="micropython" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="micropython" type="b2602c69:ProjectViewProjectNode" />
+              <item name="micropython" type="462c0819:PsiDirectoryNode" />
+              <item name="extensions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="micropython" type="b2602c69:ProjectViewProjectNode" />
@@ -154,11 +107,21 @@
               <item name="ports" type="462c0819:PsiDirectoryNode" />
               <item name="stm32" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="micropython" type="b2602c69:ProjectViewProjectNode" />
+              <item name="micropython" type="462c0819:PsiDirectoryNode" />
+              <item name="ports" type="462c0819:PsiDirectoryNode" />
+              <item name="stm32" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="micropython" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -233,19 +196,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4047000" />
+    <option name="totallyTimeSpent" value="4248000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="9" y="23" width="1640" height="1027" extended-state="6" />
+    <frame x="0" y="23" width="1633" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32352942" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6539075" visible="true" weight="0.25267127" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
@@ -253,11 +212,15 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="make" weight="0.4718398" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="make" order="3" weight="0.4718398" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,8 +273,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ports/stm32/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-298">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="385">
+          <caret line="612" column="41" selection-start-line="612" selection-start-column="38" selection-end-line="612" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -382,6 +345,13 @@
     <entry file="file://$PROJECT_DIR$/examples/embedding/hello-embed.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-619" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/stm32/modules/lcd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="21" selection-start-line="21" selection-start-column="2" selection-end-line="24" selection-end-column="26" />
+        </state>
       </provider>
     </entry>
   </component>

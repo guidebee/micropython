@@ -19,10 +19,10 @@ micropython.alloc_emergency_exception_buf(100)
 imgdir = 'images'
 cachedir = 'cache'
 imgcachepath = imgdir + '/' + cachedir
-if cachedir not in os.listdir(imgdir):
-    try:
-        os.mkdir(imgcachepath)
-    except OSError: pass
+# if cachedir not in os.listdir(imgdir):
+#     try:
+#         os.mkdir(imgcachepath)
+#     except OSError: pass
 
 rate = 42000000
 
