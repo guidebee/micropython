@@ -26,8 +26,7 @@
     :license: LGPL, see LICENSE for more details.
 """
 
-from ucollections import namedtuple
-
+from collections import namedtuple
 
 LNM = 20
 
@@ -36,7 +35,6 @@ LNM = 20
 #: right margin are lost. Otherwise, new display characters replace
 #: old display characters at the cursor position.
 IRM = 4
-
 
 #: *Auto Wrap Mode*: selects where received graphic characters appear
 #: when the cursor is at the right margin.
@@ -377,9 +375,11 @@ class Screen(object):
         if self.cursor.y == bottom:
             # TODO: mark only the lines within margins?
             self.dirty.update(range(self.lines))
+            interval = range(self.columns)
             for y in range(top, bottom):
-                self.buffer[y] = self.buffer[y + 1]
-            self.buffer.pop(bottom)
+                for x in interval:
+                    self.buffer[y][x] = self.buffer[y + 1][x]
+            self.erase_current_line(bottom)
         else:
             self.cursor_down()
 
@@ -391,9 +391,11 @@ class Screen(object):
         if self.cursor.y == top:
             # TODO: mark only the lines within margins?
             self.dirty.update(range(self.lines))
+            interval = range(self.columns)
             for y in range(bottom, top, -1):
-                self.buffer[y] = self.buffer[y - 1]
-            self.buffer.pop(top)
+                for x in interval:
+                    self.buffer[y][x] = self.buffer[y - 1][x]
+            self.erase_current_line(top)
         else:
             self.cursor_up()
 
@@ -523,6 +525,12 @@ class Screen(object):
         line = self.buffer[self.cursor.y]
         for x in range(self.cursor.x,
                        min(self.cursor.x + count, self.columns)):
+            line[x] = self.cursor.attrs
+
+    def erase_current_line(self, line_no):
+        line = self.buffer[line_no]
+        interval = range(self.columns)
+        for x in interval:
             line[x] = self.cursor.attrs
 
     def erase_in_line(self, how=0, private=False):

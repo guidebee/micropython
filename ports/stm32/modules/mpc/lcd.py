@@ -1,5 +1,3 @@
-
-
 import os
 import struct
 import math
@@ -9,9 +7,9 @@ import gc
 import pyb, micropython
 from pyb import SPI, Pin
 
-#from decorators import dimensions
-from registers import regs
-from colors import *
+# from decorators import dimensions
+from .registers import regs
+from .colors import *
 
 micropython.alloc_emergency_exception_buf(100)
 
@@ -28,29 +26,70 @@ rate = 42000000
 
 __all__ = []
 
+
+def importing(font):
+    if font == 'Arrows_15':
+        from .fonts.arrows_15 import Arrows_15 as font
+    elif font == 'Arrows_23':
+        from .fonts.arrows_23 import Arrows_23 as font
+    elif font == 'Vera_10':
+        from .fonts.vera_10 import Vera_10 as font
+    elif font == 'Vera_m10':  # Minimal Charset
+        from .fonts.vera_m10 import Vera_m10 as font
+    elif font == 'Arial_14':
+        from .fonts.arial_14 import Arial_14 as font
+    elif font == 'Vera_15':
+        from .fonts.vera_15 import Vera_15 as font
+    elif font == 'Vera_m15':
+        from .fonts.vera_m15 import Vera_m15 as font
+    elif font == 'VeraMono_15':
+        from .fonts.veram_15 import VeraMono_15 as font
+    elif font == 'VeraMono_m15':
+        from .fonts.veram_m15 import VeraMono_m15 as font
+    elif font == 'Pitch_m15':
+        from .fonts.pitch_15 import Pitch_m15 as font
+    elif font == 'Pitch_m23':
+        from .fonts.pitch_23 import Pitch_m23 as font
+    elif font == 'VeraMono_m23':
+        from .fonts.veram_m23 import VeraMono_m23 as font
+    elif font == 'Heydings_23':
+        from .fonts.heyd_23 import Heydings_23 as font
+    elif font == 'Entypo_13':
+        from .fonts.etypo_13 import Entypo_13 as font
+    elif font == 'Entypo_23':
+        from .fonts.etypo_23 import Entypo_23 as font
+    elif font == 'Amstrad_8':
+        from .fonts.amstrad import Amstrad_8 as font
+    elif font == 'Monospace_8':
+        from .fonts.monospace import Monospace_8 as font
+    else:
+        font = None
+    return font
+
+
 class ILI(object):
-    _cnt  = 0
+    _cnt = 0
     _regs = dict()
-    _spi  = object()
-    _rst  = object()
-    _csx  = object()
-    _dcx  = object()
-    portrait  = False
+    _spi = object()
+    _rst = object()
+    _csx = object()
+    _dcx = object()
+    portrait = False
 
-    _tftwidth  = 240                                                           # TFT width Constant
-    _tftheight = 320                                                           # TFT height Constant
+    _tftwidth = 240  # TFT width Constant
+    _tftheight = 320  # TFT height Constant
 
-    _curwidth  = 240                                                           # Current TFT width
-    _curheight = 320                                                           # Current TFT height
+    _curwidth = 240  # Current TFT width
+    _curheight = 320  # Current TFT height
 
     def __init__(self, rstPin='X3', csxPin='X4', dcxPin='X5', port=1, rate=rate,
-                chip='ILI9341', portrait=False):
+                 chip='ILI9341', portrait=False):
         if ILI._cnt == 0:
             ILI._regs = regs[chip]
-            ILI._spi  = SPI(port, SPI.MASTER, baudrate=rate, polarity=1, phase=1)
-            ILI._rst  = Pin(rstPin, Pin.OUT_PP)                                # Reset Pin
-            ILI._csx  = Pin(csxPin, Pin.OUT_PP)                                # CSX Pin
-            ILI._dcx  = Pin(dcxPin, Pin.OUT_PP)                                # D/Cx Pin
+            ILI._spi = SPI(port, SPI.MASTER, baudrate=rate, polarity=1, phase=1)
+            ILI._rst = Pin(rstPin, Pin.OUT_PP)  # Reset Pin
+            ILI._csx = Pin(csxPin, Pin.OUT_PP)  # CSX Pin
+            ILI._dcx = Pin(dcxPin, Pin.OUT_PP)  # D/Cx Pin
             self.reset()
             self._initILI()
 
@@ -60,9 +99,9 @@ class ILI(object):
 
     @micropython.viper
     def reset(self):
-        ILI._rst.low()                                                         #
-        pyb.delay(1)                                                           #    RESET LCD SCREEN
-        ILI._rst.high()                                                        #
+        ILI._rst.low()  #
+        pyb.delay(1)  # RESET LCD SCREEN
+        ILI._rst.high()  #
 
     @micropython.viper
     def _gcCollect(self):
@@ -72,28 +111,28 @@ class ILI(object):
     def _setWH(self):
         if ILI.portrait:
             ILI._curheight = self.TFTHEIGHT = ILI._tftheight
-            ILI._curwidth  = self.TFTWIDTH  = ILI._tftwidth
+            ILI._curwidth = self.TFTWIDTH = ILI._tftwidth
         else:
             ILI._curheight = self.TFTHEIGHT = ILI._tftwidth
-            ILI._curwidth  = self.TFTWIDTH  = ILI._tftheight
+            ILI._curwidth = self.TFTWIDTH = ILI._tftheight
         self._graph_orientation()
 
     @micropython.viper
     def _initILI(self):
-        self._write_cmd(ILI._regs['LCDOFF'])                                   # Display OFF
+        self._write_cmd(ILI._regs['LCDOFF'])  # Display OFF
         pyb.delay(10)
-        self._write_cmd(ILI._regs['SWRESET'])                                  # Reset SW
+        self._write_cmd(ILI._regs['SWRESET'])  # Reset SW
         pyb.delay(50)
         self._graph_orientation()
-        self._write_cmd(ILI._regs['PTLON'])                                    # Partial mode ON
-        self._write_cmd(ILI._regs['PIXFMT'])                                   # Pixel format set
-        #self._write_data(0x66)                                                # 18-bit/pixel
-        self._write_data(0x55)                                                 # 16-bit/pixel
+        self._write_cmd(ILI._regs['PTLON'])  # Partial mode ON
+        self._write_cmd(ILI._regs['PIXFMT'])  # Pixel format set
+        # self._write_data(0x66)                                                # 18-bit/pixel
+        self._write_data(0x55)  # 16-bit/pixel
         self._write_cmd(ILI._regs['GAMMASET'])
         self._write_data(0x01)
-        self._write_cmd(ILI._regs['ETMOD'])                                    # Entry mode set
+        self._write_cmd(ILI._regs['ETMOD'])  # Entry mode set
         self._write_data(0x07)
-        self._write_cmd(ILI._regs['SLPOUT'])                                   # sleep mode OFF
+        self._write_cmd(ILI._regs['SLPOUT'])  # sleep mode OFF
         pyb.delay(10)
         self._write_cmd(ILI._regs['LCDON'])
         pyb.delay(10)
@@ -136,9 +175,9 @@ class ILI(object):
         # getting just 3 bytes from bytearray as BGR
         data = struct.unpack('>3B', data)
         # with those 3 assignmentations we sorting useful bits for each color
-        red   = (((data[2]>>2) & 31) << 11)
-        green = (((data[1]>>1) & 63) << 5)
-        blue  = ((data[0]>>2) & 31)
+        red = (((data[2] >> 2) & 31) << 11)
+        green = (((data[1] >> 1) & 63) << 5)
+        blue = ((data[0] >> 2) & 31)
         # setting them to 16 bit color
         data = red | green | blue
         data = struct.pack('>H', data)
@@ -160,7 +199,7 @@ class ILI(object):
 
     @micropython.viper
     def _graph_orientation(self):
-        self._write_cmd(ILI._regs['MADCTL'])   # Memory Access Control
+        self._write_cmd(ILI._regs['MADCTL'])  # Memory Access Control
         # Portrait:
         # | MY=0 | MX=1 | MV=0 | ML=0 | BGR=1 | MH=0 | 0 | 0 |
         # OR Landscape:
@@ -170,7 +209,7 @@ class ILI(object):
 
     @micropython.viper
     def _char_orientation(self):
-        self._write_cmd(ILI._regs['MADCTL'])   # Memory Access Control
+        self._write_cmd(ILI._regs['MADCTL'])  # Memory Access Control
         # Portrait:
         # | MY=1 | MX=1 | MV=1 | ML=0 | BGR=1 | MH=0 | 0 | 0 |
         # OR Landscape:
@@ -180,7 +219,7 @@ class ILI(object):
 
     @micropython.viper
     def _image_orientation(self):
-        self._write_cmd(ILI._regs['MADCTL'])   # Memory Access Control
+        self._write_cmd(ILI._regs['MADCTL'])  # Memory Access Control
         # Portrait:
         # | MY=0 | MX=1 | MV=0 | ML=0 | BGR=1 | MH=0 | 0 | 0 |
         # OR Landscape:
@@ -191,10 +230,10 @@ class ILI(object):
     def _set_window(self, x0, y0, x1, y1):
         # Column Address Set
         self._write_cmd(ILI._regs['CASET'])
-        self._write_words(((x0>>8) & 0xFF, x0 & 0xFF, (y0>>8) & 0xFF, y0 & 0xFF))
+        self._write_words(((x0 >> 8) & 0xFF, x0 & 0xFF, (y0 >> 8) & 0xFF, y0 & 0xFF))
         # Page Address Set
         self._write_cmd(ILI._regs['PASET'])
-        self._write_words(((x1>>8) & 0xFF, x1 & 0xFF, (y1>>8) & 0xFF, y1 & 0xFF))
+        self._write_words(((x1 >> 8) & 0xFF, x1 & 0xFF, (y1 >> 8) & 0xFF, y1 & 0xFF))
         # Memory Write
         self._write_cmd(ILI._regs['RAMWR'])
 
@@ -205,7 +244,7 @@ class ILI(object):
             word = 0
         else:
             R, G, B = color
-            word = (R<<11) | (G<<5) | B
+            word = (R << 11) | (G << 5) | B
         word = struct.pack('>H', word)
         return word
 
@@ -219,7 +258,7 @@ class ILI(object):
     # Method writed by MCHobby https://github.com/mchobby
     # Transform a RGB888 color to RGB565 color tuple.
     def rgbTo565(self, r, g, b):
-        return (r>>3, g>>2, b>>3)
+        return (r >> 3, g >> 2, b >> 3)
 
     @property
     def portrait(self):
@@ -228,15 +267,16 @@ class ILI(object):
     @portrait.setter
     def portrait(self, portr):
         if not isinstance(portr, bool):
-            from exceptions import PortraitBoolError
+            from .exceptions import PortraitBoolError
             raise PortraitBoolError
         self.portrait = portr
         self._setWH()
 
+
 class BaseDraw(ILI):
 
     def _set_ortho_line(self, width, length, color):
-        pixels = width * (length+1)
+        pixels = width * (length + 1)
         word = self._get_Npix_monoword(color) * pixels
         self._write_data(word)
 
@@ -247,64 +287,66 @@ class BaseDraw(ILI):
     def drawVline(self, x, y, length, color, width=1):
         if length > self.TFTHEIGHT: length = self.TFTHEIGHT
         if width > 10: width = 10
-        self._set_window(x, x+(width-1), y, y+length-1)
+        self._set_window(x, x + (width - 1), y, y + length - 1)
         self._set_ortho_line(width, length, color)
 
     def drawHline(self, x, y, length, color, width=1):
         if length > self.TFTWIDTH: length = self.TFTWIDTH
         if width > 10: width = 10
-        self._set_window(x, x+length-1, y, y+(width-1))
+        self._set_window(x, x + length - 1, y, y + (width - 1))
         self._set_ortho_line(width, length, color)
 
     # Method writed by MCHobby https://github.com/mchobby
     # TODO:
     # 1. support border > 1
     def drawLine(self, x, y, x1, y1, color):
-        if x==x1:
-            self.drawVline( x, y if y<=y1 else y1, abs(y1-y), color )
-        elif y==y1:
-            self.drawHline( x if x<=x1 else x1, y, abs(x-x1), color )
+        if x == x1:
+            self.drawVline(x, y if y <= y1 else y1, abs(y1 - y), color)
+        elif y == y1:
+            self.drawHline(x if x <= x1 else x1, y, abs(x - x1), color)
         else:
             # keep positive range for x
             if x1 < x:
-              x,x1 = x1,x
-              y,y1 = y1,y
-            r = (y1-y)/(x1-x)
+                x, x1 = x1, x
+                y, y1 = y1, y
+            r = (y1 - y) / (x1 - x)
             # select ratio > 1 for fast drawing (and thin line)
             if abs(r) >= 1:
-                for i in range( x1-x+1 ):
-                    if (i==0): # first always a point
-                        self.drawPixel( x+i, math.trunc(y+(r*i)), color )
+                for i in range(x1 - x + 1):
+                    if (i == 0):  # first always a point
+                        self.drawPixel(x + i, math.trunc(y + (r * i)), color)
                     else:
                         # r may be negative when drawing to wrong way > Fix it when drawing
-                        self.drawVline( x+i, math.trunc(y+(r*i)-r)+(0 if r>0 else math.trunc(r)), abs(math.trunc(r)), color )
+                        self.drawVline(x + i, math.trunc(y + (r * i) - r) + (0 if r > 0 else math.trunc(r)),
+                                       abs(math.trunc(r)), color)
             else:
                 # keep positive range for y
                 if y1 < y:
-                    x,x1 = x1,x
-                    y,y1 = y1,y
+                    x, x1 = x1, x
+                    y, y1 = y1, y
                 # invert the ratio (should be close of r = 1/r)
-                r = (x1-x)/(y1-y)
-                for i in range( y1-y+1 ):
-                    if( i== 0): # starting point is always a point
-                        self.drawPixel( math.trunc(x+(r*i)), y+i, color )
+                r = (x1 - x) / (y1 - y)
+                for i in range(y1 - y + 1):
+                    if (i == 0):  # starting point is always a point
+                        self.drawPixel(math.trunc(x + (r * i)), y + i, color)
                     else:
                         # r may be negative when drawing the wrong way > fix it to draw positive
-                        self.drawHline( math.trunc(x+(r*i)-r)+(0 if r>0 else math.trunc(r)), y+i, abs(math.trunc(r)), color )
+                        self.drawHline(math.trunc(x + (r * i) - r) + (0 if r > 0 else math.trunc(r)), y + i,
+                                       abs(math.trunc(r)), color)
 
     def drawRect(self, x, y, width, height, color, border=1, infill=None):
         border = 10 if border > 10 else border
         if width > self.TFTWIDTH: width = self.TFTWIDTH
         if height > self.TFTHEIGHT: height = self.TFTHEIGHT
         height = 2 if height < 2 else height
-        width  = 2 if width  < 2 else width
+        width = 2 if width < 2 else width
         self._graph_orientation()
         if border:
-            if border > width//2:
-                border = width//2-1
+            if border > width // 2:
+                border = width // 2 - 1
             X, Y = x, y
             for i in range(2):
-                Y = y+height-(border-1) if i == 1 else y
+                Y = y + height - (border - 1) if i == 1 else y
                 self.drawHline(X, Y, width, color, border)
 
                 if border > 1:
@@ -319,9 +361,9 @@ class BaseDraw(ILI):
             infill = color
 
         if infill:
-            xsum = x+border
-            ysum = y+border
-            dborder = border*2
+            xsum = x + border
+            ysum = y + border
+            dborder = border * 2
             self._set_window(xsum, xsum + width - dborder, ysum, ysum + height - dborder)
             # if MemoryError, try to set higher portion value
             portion = 32
@@ -333,23 +375,23 @@ class BaseDraw(ILI):
             i = 0
             while i < (times):
                 self._write_data(word)
-                i+=1
+                i += 1
         self._gcCollect()
 
     def fillMonocolor(self, color, margin=0):
         margin = 80 if margin > 80 else margin
-        width = self.TFTWIDTH-margin*2
-        height = self.TFTHEIGHT-margin*2
+        width = self.TFTWIDTH - margin * 2
+        height = self.TFTHEIGHT - margin * 2
         self.drawRect(margin, margin, width, height, color, border=0)
 
     def _get_x_perimeter_point(self, x, degrees, radius):
         sin = math.sin(math.radians(degrees))
-        x = math.trunc(x+(radius*sin))
+        x = math.trunc(x + (radius * sin))
         return x
 
     def _get_y_perimeter_point(self, y, degrees, radius):
         cos = math.cos(math.radians(degrees))
-        y = math.ceil(y-(radius*cos))
+        y = math.ceil(y - (radius * cos))
         return y
 
     def drawCircle(self, x, y, radius, color, border=1, degrees=360, startangle=0):
@@ -359,57 +401,58 @@ class BaseDraw(ILI):
         if startangle > 0:
             degrees += startangle
         if border > 1:
-            radius = radius-border//2
+            radius = radius - border // 2
         degp = 0.5
         quotient = int(divmod(1, degp)[0])
         for i in range(startangle, degrees):
-            for j in tuple(i + degp * j for j in range(1, quotient+1)):
-                X = self._get_x_perimeter_point(x+degp, j, radius)
-                Y = self._get_y_perimeter_point(y+degp, j, radius)
+            for j in tuple(i + degp * j for j in range(1, quotient + 1)):
+                X = self._get_x_perimeter_point(x + degp, j, radius)
+                Y = self._get_y_perimeter_point(y + degp, j, radius)
                 self.drawHline(X, Y, border, color, border)
 
     def drawCircleFilled(self, x, y, radius, color):
         tempY = 0
         self._graph_orientation()
         for i in range(180):
-            xNeg = self._get_x_perimeter_point(x, 360-i, radius-1)
+            xNeg = self._get_x_perimeter_point(x, 360 - i, radius - 1)
             xPos = self._get_x_perimeter_point(x, i, radius)
             if i > 89:
-                Y = self._get_y_perimeter_point(y, i, radius-1)
+                Y = self._get_y_perimeter_point(y, i, radius - 1)
             else:
-                Y = self._get_y_perimeter_point(y, i, radius+1)
-            if i == 90: xPos = xPos-1
+                Y = self._get_y_perimeter_point(y, i, radius + 1)
+            if i == 90: xPos = xPos - 1
             if tempY != Y and tempY > 0:
-                length = xPos+1
-                self.drawHline(xNeg, Y, length-xNeg, color, width=4)
+                length = xPos + 1
+                self.drawHline(xNeg, Y, length - xNeg, color, width=4)
             tempY = Y
 
     def drawOvalFilled(self, x, y, xradius, yradius, color):
         tempY = 0
         self._graph_orientation()
         for i in range(180):
-            xNeg = self._get_x_perimeter_point(x, 360-i, xradius)
+            xNeg = self._get_x_perimeter_point(x, 360 - i, xradius)
             xPos = self._get_x_perimeter_point(x, i, xradius)
-            Y    = self._get_y_perimeter_point(y, i, yradius)
+            Y = self._get_y_perimeter_point(y, i, yradius)
 
-            if i > 89: Y = Y-1
+            if i > 89: Y = Y - 1
             if tempY != Y and tempY > 0:
-                length = xPos+1
-                self.drawHline(xNeg, Y, length-xNeg, color, width=4)
+                length = xPos + 1
+                self.drawHline(xNeg, Y, length - xNeg, color, width=4)
             tempY = Y
+
 
 class BaseChars(ILI, BaseDraw):
     def __init__(self, color=BLACK, font=None, bgcolor=None, scale=1, **kwargs):
         super(BaseChars, self).__init__(**kwargs)
         self._fontColor = color
         if font is not None:
-            import fonts
+
             self._gcCollect()
-            font = fonts.importing(font)
+            font = importing(font)
             self._font = font
-            del(fonts)
+
         else:
-            from exceptions import NoneTypeFont
+            from .exceptions import NoneTypeFont
             raise NoneTypeFont
         self._portrait = ILI.portrait
         self._bgcolor = bgcolor if bgcolor is None else self._get_Npix_monoword(bgcolor)
@@ -418,10 +461,10 @@ class BaseChars(ILI, BaseDraw):
     def _setWH(self):
         if ILI.portrait:
             self.TFTHEIGHT = ILI._tftheight
-            self.TFTWIDTH  = ILI._tftwidth
+            self.TFTWIDTH = ILI._tftwidth
         else:
             self.TFTHEIGHT = ILI._tftwidth
-            self.TFTWIDTH  = ILI._tftheight
+            self.TFTWIDTH = ILI._tftheight
         self._char_orientation()
 
     @micropython.viper
@@ -448,11 +491,11 @@ class BaseChars(ILI, BaseDraw):
     def _fill_bicolor(self, data, x, y, width, height, scale=None):
         bgcolor = self._get_bgcolor(x, y) if not self._bgcolor else self._bgcolor
         color = self._fontColor
-        self._set_window(x, x+(height*scale)-1, y, y+(width*scale))
+        self._set_window(x, x + (height * scale) - 1, y, y + (width * scale))
         bgpixel = bgcolor * scale
         pixel = self._get_Npix_monoword(color) * scale
         words = ''.join(map(self._set_word_length, data))
-        self._gcCollect()                                                      # Garbage collection
+        self._gcCollect()  # Garbage collection
         words = bytes(words, 'ascii').replace(b'0', bgpixel).replace(b'1', pixel)
         self._write_data(words)
         self._graph_orientation()
@@ -479,7 +522,7 @@ class BaseChars(ILI, BaseDraw):
         self._gcCollect()
         if data is None:
             self._graph_orientation()
-            self.drawRect(x, y, height, chrwidth, self._fontColor, border=2*scale)
+            self.drawRect(x, y, height, chrwidth, self._fontColor, border=2 * scale)
         else:
             self._fill_bicolor(data, X, Y, chrwidth, height, scale=scale)
 
@@ -487,7 +530,7 @@ class BaseChars(ILI, BaseDraw):
         if scale is None:
             scale = self._fontscale
         # if typed string length higher than strlen, string printing in new line
-        strlen = self.TFTWIDTH-10 if strlen is None else strlen
+        strlen = self.TFTWIDTH - 10 if strlen is None else strlen
         self._check_portrait()
         font = self._font
         X, Y = x, y
@@ -504,16 +547,17 @@ class BaseChars(ILI, BaseDraw):
                     self.printChar(word[i], x, y, scale=scale, _pl=True)
                     chpos = self._return_chpos(chrwidth, scale)
                     x += self._asm_get_charpos(chrwidth, chpos, 3)
-                x += self._asm_get_charpos(font['width']//4, chpos, 3)
+                x += self._asm_get_charpos(font['width'] // 4, chpos, 3)
             x = X
             y += (font['height'] + 2) * scale
+
 
 class BaseImages(ILI):
 
     # solution from forum.micropython.org
     @staticmethod
     @micropython.asm_thumb
-    def _reverse(r0, r1):                                                      # bytearray, len(bytearray)
+    def _reverse(r0, r1):  # bytearray, len(bytearray)
         b(loopend)
         label(loopstart)
         ldrb(r2, [r0, 0])
@@ -522,26 +566,26 @@ class BaseImages(ILI):
         strb(r2, [r0, 1])
         add(r0, 2)
         label(loopend)
-        sub(r1, 2)                                                             # End of loop?
+        sub(r1, 2)  # End of loop?
         bpl(loopstart)
 
     @micropython.viper
     def _set_image_headers(self, f):
         headers = list()
         if f.read(2) != b'BM':
-            from exceptions import BMPvalidationError
+            from .exceptions import BMPvalidationError
             raise BMPvalidationError
-        for pos in (10, 18, 22):                                               # startbit, width, height
+        for pos in (10, 18, 22):  # startbit, width, height
             f.seek(pos)
-            headers.append(struct.unpack('<H', f.read(2))[0])                  # read double byte
+            headers.append(struct.unpack('<H', f.read(2))[0])  # read double byte
         return headers
 
     def _get_image_points(self, pos, width, height):
         if isinstance(pos, (list, tuple)):
             x, y = pos
         else:
-            x = 0 if width  == self.TFTWIDTH else (self.TFTWIDTH-width)//2
-            y = 0 if height == self.TFTHEIGHT else (self.TFTHEIGHT-height)//2
+            x = 0 if width == self.TFTWIDTH else (self.TFTWIDTH - width) // 2
+            y = 0 if height == self.TFTHEIGHT else (self.TFTHEIGHT - height) // 2
         return x, y
 
     def _write_from_bmp(self, f, memread):
@@ -558,7 +602,7 @@ class BaseImages(ILI):
             if width < self.TFTWIDTH:
                 width -= 1
             x, y = self._get_image_points(pos, width, height)
-            self._set_window(x, (width)+x, y, (height)+y)
+            self._set_window(x, (width) + x, y, (height) + y)
             f.seek(startbit)
             while True:
                 try:
@@ -582,7 +626,7 @@ class BaseImages(ILI):
             if width < self.TFTWIDTH:
                 width -= 1
             x, y = self._get_image_points(pos, width, height)
-            self._set_window(x, (width)+x, y, (height)+y)
+            self._set_window(x, (width) + x, y, (height) + y)
             f.seek(startbit)
             while True:
                 try:
@@ -625,7 +669,7 @@ class BaseImages(ILI):
         strings = self.initCh(color=DARKGREY, font='Arial_14')
         strings.printLn("Caching:", 25, 25)
         strings.printLn(image + '...', 45, 45)
-        memread = 60                                                           # less memory write - more stable result
+        memread = 60  # less memory write - more stable result
         cachedimage = image + '.' + cachedir
         if cachedimage in os.listdir(imgcachepath):
             os.remove(imgcachepath + '/' + cachedimage)
@@ -649,7 +693,7 @@ class BaseImages(ILI):
         self.fillMonocolor(BLACK)
         strings.printLn(image + " cached", 25, 25)
         print('Cached:', image)
-        del(strings)
+        del (strings)
         pyb.delay(100)
         self._gcCollect()
 
@@ -664,7 +708,8 @@ class BaseImages(ILI):
         for image in os.listdir(imgdir):
             if image == cachedir: continue
             self.cacheImage(image, imgdir=imgdir)
-            pyb.delay(100)                                                     # delay for better and stable result
+            pyb.delay(100)  # delay for better and stable result
+
 
 class Chars(BaseChars):
 
@@ -680,10 +725,8 @@ class Chars(BaseChars):
 
     @font.setter
     def font(self, font):
-        import fonts
-        font = fonts.importing(font)
+        importing(font)
         self._font = font
-        del(fonts)
 
     @property
     def fontscale(self):
@@ -696,10 +739,11 @@ class Chars(BaseChars):
     @portrait.setter
     def portrait(self, portr):
         if not isinstance(portr, bool):
-            from exceptions import PortraitBoolError
+            from .exceptions import PortraitBoolError
             raise PortraitBoolError
         self._portrait = portr
         self._setWH()
+
 
 # should be replaced to own module
 class BaseWidgets(BaseDraw, BaseImages):
@@ -710,7 +754,7 @@ class BaseWidgets(BaseDraw, BaseImages):
             chpos = self._return_chpos(chrwidth, 1) + 3 + chrwidth
             return chpos
         except KeyError:
-            return 5 if ord(char) is 32 else 0                                 # if space between words
+            return 5 if ord(char) is 32 else 0  # if space between words
 
     def _get_maxstrW(self, width):
         # compute max string length
@@ -727,17 +771,17 @@ class BaseWidgets(BaseDraw, BaseImages):
 
     def _compute_lines(self, string, maxstrW):
         words = string.split(' ')
-        lines = [[0,]]
+        lines = [[0, ]]
         i = 0
         space = self._get_strW(chr(32))
         for word in words:
             lenw = self._get_strW(word)
             if lines[i][0] + lenw >= maxstrW:
-                if not i and not lines[0][0]:                                  # if first word is too large
+                if not i and not lines[0][0]:  # if first word is too large
                     len_bl = self._get_strW(self._blank)
                     assert len_bl < maxstrW, self._asserts
                     print(self._asserts)
-                    return [[len_bl, self._blank]]                             # return '(..)'
+                    return [[len_bl, self._blank]]  # return '(..)'
                 lines.append([0, ])
                 i += 1
             lines[i][0] += lenw + space
@@ -746,11 +790,11 @@ class BaseWidgets(BaseDraw, BaseImages):
 
     def _get_str_structure(self, string, xy, width, height):
         x, y = xy
-        maxW = width if width and width < self.TFTWIDTH else self.TFTWIDTH - x - 5        # max widget width
-        maxH = height if height and height < self.TFTHEIGHT else self.TFTHEIGHT - y - 5   # max widget height
+        maxW = width if width and width < self.TFTWIDTH else self.TFTWIDTH - x - 5  # max widget width
+        maxH = height if height and height < self.TFTHEIGHT else self.TFTHEIGHT - y - 5  # max widget height
         border = self._border
-        maxstrW  = self._get_maxstrW(maxW)                                                # max string width
-        strwidth = self._get_strW(string)                                                 # current string width
+        maxstrW = self._get_maxstrW(maxW)  # max string width
+        strwidth = self._get_strW(string)  # current string width
         strheight = self._font['height']
         assert strheight < maxH, self._asserts
         widgH = strheight + 6 + border * 2 if height is None else maxH
@@ -759,12 +803,12 @@ class BaseWidgets(BaseDraw, BaseImages):
         # if width and height are defined, large string cuts to widget scale
         if strwidth >= maxstrW:
             structure.extend(self._compute_lines(string, maxstrW))
-            linen = len(structure[3:])                                         # structure[3:] = all lines
+            linen = len(structure[3:])  # structure[3:] = all lines
             widgH = strheight * linen + 3 * (linen + 1) + border * 2
             structure[1] = widgH if height is None else maxH
             if widgH > maxH:
                 linen = maxH // (strheight + 3)
-                strheight = strheight * linen + 3 * (linen-1)
+                strheight = strheight * linen + 3 * (linen - 1)
                 structure = structure[:linen + 3]
                 structure[-1][1] += self._blank
                 strW = self._get_strW(structure[-1][1])
@@ -792,13 +836,13 @@ class BaseWidgets(BaseDraw, BaseImages):
     def _widget(self, x, y, color, infill, string, width=None, height=None,
                 strobj=None, border=1):
         if strobj is None:
-            from exceptions import NoneStringObject
+            from .exceptions import NoneStringObject
             raise NoneStringObject
         border = 10 if border > 10 else border
         self._blank = '(..)'
         self._asserts = 'widget dims too low'
         self._font = strobj.font
-        strobj._fontscale = 1                                                  # widget font scale always is 1
+        strobj._fontscale = 1  # widget font scale always is 1
         self._border = border
         strheight = strobj.font['height']
         structure = self._get_str_structure(string, (x, y), width, height)
@@ -817,6 +861,7 @@ class BaseWidgets(BaseDraw, BaseImages):
         x1, y1 = x + width, y + height
         return x, y, x1, y1
 
+
 class Widgets(BaseWidgets):
 
     def label(self, *args, **kwargs):
@@ -827,6 +872,7 @@ class Widgets(BaseWidgets):
 
     def entry(self):
         pass
+
 
 class LCD(Widgets):
 
@@ -886,7 +932,7 @@ class LCD(Widgets):
     @portrait.setter
     def portrait(self, portr):
         if not isinstance(portr, bool):
-            from exceptions import PortraitBoolError
+            from .exceptions import PortraitBoolError
             raise PortraitBoolError
         ILI.portrait = portr
         self._setWH()
