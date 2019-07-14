@@ -30,7 +30,7 @@ key_code_ascii = {'A': 'a', 'B': 'b', 'C': 'c', 'D': 'd', 'E': 'e', 'F': 'f',
                   '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6',
                   '7': '7', '8': '8', '9': '9', '0': '0',
                   'ENTER': '\r', 'ESC': '\x1b', 'BACKSPACE': '\b',
-                  'TAB': '  ', 'SPACE': ' ', 'MINUS': '-',
+                  'TAB': '\t', 'SPACE': ' ', 'MINUS': '-',
                   'EQUAL': '=', 'LEFT_BRACE': '[',
                   'RIGHT_BRACE': ']', 'BACKSLASH': '\\',
                   'SEMICOLON': ';',
@@ -84,7 +84,7 @@ class Terminal(IOBase):
         self.rows = rows
         self.columns = columns
         self.show_cursor = True
-        self.cursor_delay = 500
+        self.cursor_delay = 100
         self.last_draw_cursor_time = time.ticks_ms()
         self.last_cursor_x = 0
         self.last_cursor_y = 0
@@ -109,7 +109,7 @@ class Terminal(IOBase):
 
     def readinto(self, buf):
         key_input = self.read()
-        # self.draw_cursor()
+        self.draw_cursor()
         self._gcCollect()
         if key_input is not None:
             bytes_key_input = str.encode(key_input)
@@ -127,7 +127,14 @@ class Terminal(IOBase):
         gc.collect()
 
     def write(self, buf):
-        self.input_stream.feed(str(buf, 'utf-8'))
+        if self.screen.cursor.y == self.rows - 1:
+            self.screen.reset()
+            self.screen.dirty.clear()
+            self.lcd.fillMonocolor(self.background)
+        str_buf = str(buf, 'utf-8')
+        for b in str_buf:
+            self.input_stream.feed(str(b, 'utf-8'))
+        del str_buf
         self.update_screen()
 
     def draw_text(self, text, x, y, ):
@@ -217,10 +224,11 @@ class Terminal(IOBase):
         if delta > self.cursor_delay:
             self._gcCollect()
             ch = self.screen_buffer[self.last_cursor_x][self.last_cursor_y]
-            if ch is None:
-                ch = ' '
-            self.draw_text(ch, self.last_cursor_x * 8 + 1,
-                           self.last_cursor_y * 8 + 1)
+            # if ch is None:
+            #     self.lcd.drawHline(self.last_cursor_x * 8 + 1, self.last_cursor_y * 8 + 1, 8, self.background, 8)
+            # else:
+            #     self.draw_text(ch, self.last_cursor_x * 8 + 1,
+            #                    self.last_cursor_y * 8 + 1)
             self.last_cursor_x = self.screen.cursor.x
             self.last_cursor_y = self.screen.cursor.y
             self.last_draw_cursor_time = time.ticks_ms()
@@ -231,3 +239,9 @@ class Terminal(IOBase):
             else:
                 self.show_cursor = True
                 self.lcd.drawHline(self.screen.cursor.x * 8 + 1, self.screen.cursor.y * 8 + 5, 8, self.foreground, 4)
+                time.sleep_ms(400)
+                if ch is None or ch == ' ':
+                    self.lcd.drawHline(self.last_cursor_x * 8 + 1, self.last_cursor_y * 8 + 1, 8, self.background, 8)
+                else:
+                    self.draw_text(ch, self.last_cursor_x * 8 + 1,
+                                   self.last_cursor_y * 8 + 1)

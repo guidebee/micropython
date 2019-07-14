@@ -20,7 +20,7 @@
     :license: LGPL, see LICENSE for more details.
 """
 
-import re
+import ure
 
 #: *Space*: Not suprisingly -- ``" "``.
 SP = " "
@@ -313,7 +313,7 @@ class Stream(object):
     #: considered plain text.
     _special = set([ESC, CSI_C1, NUL, DEL, OSC_C1])
     _special.update(basic)
-    _text_pattern = re.compile(
+    _text_pattern = ure.compile(
         "[^\\\x1b\\\x9d\\\x0b\\\t\\000\\\x08\\\x07\\\n\\\x0c\\\r\\\x9b\\\x7f]+")
     del _special
 
