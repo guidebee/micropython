@@ -11,6 +11,7 @@ import os
 import datetime
 import subprocess
 
+
 def get_version_info_from_git():
     # Python 2.6 doesn't have check_output, so check for that
     try:
@@ -21,7 +22,11 @@ def get_version_info_from_git():
 
     # Note: git describe doesn't work if no tag is available
     try:
-        git_tag = subprocess.check_output(["git", "describe", "--dirty", "--always"], stderr=subprocess.STDOUT, universal_newlines=True).strip()
+        # git_tag = subprocess.check_output(["git", "describe", "--dirty", "--always"], stderr=subprocess.STDOUT,
+        #                                   universal_newlines=True).strip()
+        git_tag = subprocess.check_output(["git", "describe", "--abbrev=0"], stderr=subprocess.STDOUT,
+                                          universal_newlines=True).strip()
+        git_tag += " Guidebee"
     except subprocess.CalledProcessError as er:
         if er.returncode == 128:
             # git exit code of 128 means no repository found
@@ -30,7 +35,8 @@ def get_version_info_from_git():
     except OSError:
         return None
     try:
-        git_hash = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.STDOUT, universal_newlines=True).strip()
+        git_hash = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.STDOUT,
+                                           universal_newlines=True).strip()
     except subprocess.CalledProcessError:
         git_hash = "unknown"
     except OSError:
@@ -48,6 +54,7 @@ def get_version_info_from_git():
 
     return git_tag, git_hash
 
+
 def get_version_info_from_docs_conf():
     with open(os.path.join(os.path.dirname(sys.argv[0]), "..", "docs", "conf.py")) as f:
         for line in f:
@@ -56,6 +63,7 @@ def get_version_info_from_docs_conf():
                 git_tag = "v" + ver
                 return git_tag, "<no hash>"
     return None
+
 
 def make_version_header(filename):
     # Get version info using git, with fallback to docs/conf.py
@@ -86,6 +94,7 @@ def make_version_header(filename):
         print("GEN %s" % filename)
         with open(filename, 'w') as f:
             f.write(file_data)
+
 
 if __name__ == "__main__":
     make_version_header(sys.argv[1])

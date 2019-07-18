@@ -137,11 +137,10 @@ class Terminal(IOBase):
                 self.lcd.fillMonocolor(self.background)
             str_buf = str(buf, 'utf-8')
             if str_buf == "\x1b[K":
-                self.clear_line(self.screen.cursor.x * 8 + 1,
-                                self.screen.cursor.y * 8 + 1)
+                self.clear_line(self.screen.cursor.x * 8,
+                                self.screen.cursor.y * 8)
 
-            for b in str_buf:
-                self.input_stream.feed(b)
+            self.input_stream.feed(str_buf)
             del str_buf
             self.update_screen()
         except:
