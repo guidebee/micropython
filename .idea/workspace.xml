@@ -12,12 +12,7 @@
     <list default="true" id="6bab6ffc-685c-4547-b201-461736f175d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ports/esp32/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/ports/esp32/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/boards/sdkconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ports/esp32/boards/sdkconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/modules/umqtt/robust.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/modules/umqtt/simple.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/modules/upysh.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/modules/urequests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ports/esp32/mpthreadport.c" beforeDir="false" afterPath="$PROJECT_DIR$/ports/esp32/mpthreadport.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py" beforeDir="false" afterPath="$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/ports/zephyr/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,51 +27,54 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/README.md">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="1659">
-                <caret line="79" column="11" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="11" />
-              </first_editor>
+              <first_editor />
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ports/unix/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-20" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ports/unix/mpconfigport.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="123" column="8" lean-forward="true" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extmod/modure.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6194">
+              <caret line="369" column="8" selection-start-line="369" selection-start-column="8" selection-end-line="369" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/screens.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="743">
+              <caret line="381" column="43" selection-start-line="381" selection-start-column="43" selection-end-line="381" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/Makefile">
+        <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="61">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/mpthreadport.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4032">
-              <caret line="192" column="5" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/network_ppp.c">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/qstrdefsport.h">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ports/esp32/README.ulp.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
+            <state relative-caret-position="579">
+              <caret line="365" column="39" selection-start-line="365" selection-start-column="39" selection-end-line="365" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -88,7 +86,11 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ports/esp32/boards/sdkconfig">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -120,12 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ure</find>
-      <find>exceptions</find>
-      <find>decorators</find>
-      <find>from exceptions</find>
-      <find>importing</find>
-      <find>import fonts</find>
       <find>fonts</find>
       <find>rgbTo565</find>
       <find>CCMRAM</find>
@@ -150,6 +146,12 @@
       <find>network_ppp</find>
       <find>efuse</find>
       <find>libefuse</find>
+      <find>PORT</find>
+      <find>BAUD</find>
+      <find>bootloader</find>
+      <find>FLASH_MODE</find>
+      <find>MICROPY_PY_URE</find>
+      <find>URE</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,18 +171,20 @@
         <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/fonts/__init__.py" />
         <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/__init__.py" />
         <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/lcd.py" />
-        <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py" />
         <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/screens.py" />
         <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/terminals.py" />
         <option value="$PROJECT_DIR$/ports/esp32/mpthreadport.c" />
+        <option value="$PROJECT_DIR$/ports/esp32/boards/sdkconfig" />
         <option value="$PROJECT_DIR$/ports/esp32/Makefile" />
+        <option value="$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="24" />
-    <option name="width" value="1633" />
-    <option name="height" value="1027" />
+    <option name="x" value="204" />
+    <option name="y" value="151" />
+    <option name="width" value="1225" />
+    <option name="height" value="771" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -198,43 +202,34 @@
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
               <item name="micropython" type="462c0819:PsiDirectoryNode" />
-              <item name="extensions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micropython" type="462c0819:PsiDirectoryNode" />
-              <item name="extensions" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micropython" type="462c0819:PsiDirectoryNode" />
               <item name="ports" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
               <item name="micropython" type="462c0819:PsiDirectoryNode" />
               <item name="ports" type="462c0819:PsiDirectoryNode" />
-              <item name="esp32" type="462c0819:PsiDirectoryNode" />
+              <item name="stm32" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
               <item name="micropython" type="462c0819:PsiDirectoryNode" />
               <item name="ports" type="462c0819:PsiDirectoryNode" />
-              <item name="esp32" type="462c0819:PsiDirectoryNode" />
-              <item name="boards" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micropython" type="462c0819:PsiDirectoryNode" />
-              <item name="ports" type="462c0819:PsiDirectoryNode" />
-              <item name="esp32" type="462c0819:PsiDirectoryNode" />
+              <item name="stm32" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
               <item name="micropython" type="462c0819:PsiDirectoryNode" />
-              <item name="py" type="462c0819:PsiDirectoryNode" />
+              <item name="ports" type="462c0819:PsiDirectoryNode" />
+              <item name="stm32" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="mpc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="micropython" type="462c0819:PsiDirectoryNode" />
+              <item name="ports" type="462c0819:PsiDirectoryNode" />
+              <item name="unix" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
@@ -334,6 +329,8 @@
       <workItem from="1563070981049" duration="2304000" />
       <workItem from="1563254396802" duration="1732000" />
       <workItem from="1563275922942" duration="227000" />
+      <workItem from="1563357186302" duration="3995000" />
+      <workItem from="1563422400344" duration="450000" />
     </task>
     <task id="LOCAL-00001" summary="add screens">
       <created>1562655518768</created>
@@ -353,13 +350,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41990000" />
+    <option name="totallyTimeSpent" value="46435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1633" height="1027" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.905" visible="true" weight="0.31363922" />
-      <window_info id="Structure" order="1" sideWeight="0.095" side_tool="true" visible="true" weight="0.31363922" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.89876544" visible="true" weight="0.22752985" />
+      <window_info id="Structure" order="1" sideWeight="0.10123457" side_tool="true" visible="true" weight="0.22752985" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
@@ -373,7 +371,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" />
-      <window_info anchor="bottom" id="CMake" order="12" visible="true" weight="0.14438502" />
+      <window_info anchor="bottom" id="CMake" order="12" visible="true" weight="0.13368984" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -390,62 +388,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="draft terminal" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/mp-readline/readline.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1176">
-          <caret line="57" column="14" lean-forward="true" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
-          <folding>
-            <element signature="e#3708#3833#0" expanded="true" />
-            <element signature="e#4006#4127#0" expanded="true" />
-            <element signature="e#5834#6256#0" expanded="true" />
-            <element signature="e#6629#7550#0" expanded="true" />
-            <element signature="e#8478#8491#0" expanded="true" />
-            <element signature="e#10006#10022#0" expanded="true" />
-            <element signature="e#10239#10254#0" expanded="true" />
-            <element signature="e#11187#11198#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/mphalport.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#527#650#0" expanded="true" />
-            <element signature="e#849#958#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/mphalport.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1912">
-          <caret line="63" column="4" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
-          <folding>
-            <element signature="e#1803#1828#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/mbedtls/mbedtls_config.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1199" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/mboot/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/lwip_inc/lwipopts.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/factoryreset.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ports/stm32/factoryreset.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -626,20 +568,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/screens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8001">
-          <caret line="381" column="43" selection-start-line="381" selection-start-column="43" selection-end-line="381" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7350">
-          <caret line="350" column="11" selection-start-line="350" selection-start-column="11" selection-end-line="350" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -653,16 +581,6 @@
     <entry file="file://$PROJECT_DIR$/py/runtime.c">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ports/esp32/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1659">
-            <caret line="79" column="11" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="11" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ports/esp32/mpthreadport.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4032">
@@ -673,9 +591,6 @@
     <entry file="file://$PROJECT_DIR$/ports/esp32/network_ppp.c">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ports/esp32/qstrdefsport.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ports/esp32/README.ulp.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -684,11 +599,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/build/sdkconfig.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1617">
+            <caret line="77" column="11" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="11" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17409">
+          <caret line="833" column="102" selection-start-line="833" selection-start-column="92" selection-end-line="833" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/qstrdefsport.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/partitions.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/esp32/mpconfigport.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/ports/esp32/boards/sdkconfig.spiram">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/ports/esp32/boards/sdkconfig">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/py/obj.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -704,10 +652,44 @@
     <entry file="file://$PROJECT_DIR$/py/runtime.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ports/esp32/Makefile">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/unix/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="-20" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/unix/mpconfigport.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="123" column="8" lean-forward="true" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extmod/modure.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6194">
+          <caret line="369" column="8" selection-start-line="369" selection-start-column="8" selection-end-line="369" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/screens.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="381" column="43" selection-start-line="381" selection-start-column="43" selection-end-line="381" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/streams.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="365" column="39" selection-start-line="365" selection-start-column="39" selection-end-line="365" selection-end-column="39" />
         </state>
       </provider>
     </entry>
