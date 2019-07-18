@@ -358,9 +358,12 @@ class Stream(object):
         offset = 0
         while offset < length:
             if taking_plain_text:
-                match = match_text(data, offset)
+                old_offset = offset
+                match = match_text(data[old_offset:])
                 if match:
                     start, offset = match.span()
+                    offset += old_offset
+                    start += old_offset
                     draw(data[start:offset])
                 else:
                     taking_plain_text = False
