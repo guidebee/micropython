@@ -84,10 +84,11 @@ class Terminal(IOBase):
         self.rows = rows
         self.columns = columns
         self.show_cursor = True
-        self.cursor_delay = 100
+        self.cursor_delay = 200
         self.last_draw_cursor_time = time.ticks_ms()
         self.last_cursor_x = 0
         self.last_cursor_y = 0
+        self.draw_cursor_in_progress = False
 
     def __del__(self):
         self.close()
@@ -127,26 +128,41 @@ class Terminal(IOBase):
         gc.collect()
 
     def write(self, buf):
-        if self.screen.cursor.y == self.rows - 1:
-            self.screen.reset()
-            self.screen.dirty.clear()
-            self.lcd.fillMonocolor(self.background)
-        str_buf = str(buf, 'utf-8')
-        for b in str_buf:
-            self.input_stream.feed(str(b, 'utf-8'))
-        del str_buf
-        self.update_screen()
+        try:
+            if self.screen.cursor.y == self.rows - 1:
+                self.screen.reset()
+                self.screen.dirty.clear()
+                self.last_cursor_x = 0
+                self.last_cursor_y = 0
+                self.lcd.fillMonocolor(self.background)
+            str_buf = str(buf, 'utf-8')
+            if str_buf == "\x1b[K":
+                self.clear_line(self.screen.cursor.x * 8 + 1,
+                                self.screen.cursor.y * 8 + 1)
+
+            for b in str_buf:
+                self.input_stream.feed(b)
+            del str_buf
+            self.update_screen()
+        except:
+            pass
+
+    def clear_line(self, x, y):
+        self.lcd.drawHline(x, y, 320, self.background, 8)
 
     def draw_text(self, text, x, y, ):
-        count = len(text)
-        for i in range(count):
-            if text[i] != ' ':
-                if text[i] == 'i' or text[i] == 'l':
-                    offset = 2
-                else:
-                    offset = 0
-                self.lcd.drawHline(x + i * 8, y, 8, self.background, 8)
-                self.lcd.printChar(text[i], x + i * 8 + offset, y)
+        if text is None or text == ' ':
+            self.lcd.drawHline(x, y, 8, self.background, 8)
+        else:
+            count = len(text)
+            for i in range(count):
+                if text[i] != ' ':
+                    if text[i] == 'i' or text[i] == 'l':
+                        offset = 2
+                    else:
+                        offset = 0
+                    self.lcd.drawHline(x + i * 8, y, 8, self.background, 8)
+                    self.lcd.printChar(text[i], x + i * 8 + offset, y)
 
     def update_screen(self):
         for dirty_row in self.screen.dirty:
@@ -220,28 +236,28 @@ class Terminal(IOBase):
         return None
 
     def draw_cursor(self):
-        delta = time.ticks_diff(time.ticks_ms(), self.last_draw_cursor_time)
-        if delta > self.cursor_delay:
-            self._gcCollect()
-            ch = self.screen_buffer[self.last_cursor_x][self.last_cursor_y]
-            # if ch is None:
-            #     self.lcd.drawHline(self.last_cursor_x * 8 + 1, self.last_cursor_y * 8 + 1, 8, self.background, 8)
-            # else:
-            #     self.draw_text(ch, self.last_cursor_x * 8 + 1,
-            #                    self.last_cursor_y * 8 + 1)
-            self.last_cursor_x = self.screen.cursor.x
-            self.last_cursor_y = self.screen.cursor.y
-            self.last_draw_cursor_time = time.ticks_ms()
-            if self.show_cursor:
-                self.lcd.drawHline(self.screen.cursor.x * 8 + 1, self.screen.cursor.y * 8 + 1, 8, self.background, 8)
-                self.show_cursor = False
+        if not self.draw_cursor_in_progress:
+            self.draw_cursor_in_progress = True
+            delta = time.ticks_diff(time.ticks_ms(), self.last_draw_cursor_time)
 
-            else:
-                self.show_cursor = True
-                self.lcd.drawHline(self.screen.cursor.x * 8 + 1, self.screen.cursor.y * 8 + 5, 8, self.foreground, 4)
-                time.sleep_ms(400)
-                if ch is None or ch == ' ':
-                    self.lcd.drawHline(self.last_cursor_x * 8 + 1, self.last_cursor_y * 8 + 1, 8, self.background, 8)
+            if delta > self.cursor_delay:
+                self._gcCollect()
+                self.last_draw_cursor_time = time.ticks_ms()
+                if self.show_cursor:
+                    self.draw_text(self.screen_buffer[self.screen.cursor.y][self.screen.cursor.x],
+                                   self.screen.cursor.x * 8 + 1,
+                                   self.screen.cursor.y * 8 + 1)
+
+                    self.show_cursor = False
+
                 else:
-                    self.draw_text(ch, self.last_cursor_x * 8 + 1,
-                                   self.last_cursor_y * 8 + 1)
+                    self.show_cursor = True
+                    self.lcd.drawHline(self.screen.cursor.x * 8 + 1,
+                                       self.screen.cursor.y * 8 + 7, 8, self.foreground,
+                                       1)
+                    time.sleep_ms(500)
+
+                    self.draw_text(self.screen_buffer[self.screen.cursor.y][self.screen.cursor.x],
+                                   self.screen.cursor.x * 8 + 1,
+                                   self.screen.cursor.y * 8 + 1)
+            self.draw_cursor_in_progress = False

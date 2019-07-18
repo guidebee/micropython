@@ -26,7 +26,7 @@
     :license: LGPL, see LICENSE for more details.
 """
 
-from collections import namedtuple
+from ucollections import namedtuple
 
 LNM = 20
 
