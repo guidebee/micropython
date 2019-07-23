@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build-mpy-cross') {
                 steps {
-                    sh "cd mpy-cross & make "
+                    sh "cd mpy-cross; make "
                 }
             }
 
