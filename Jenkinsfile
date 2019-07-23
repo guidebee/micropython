@@ -1,16 +1,14 @@
 pipeline {
     agent any
 
+
+
     stages {
-        stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-              }
+        stage('build-mpy-cross') {
+                steps {
+                    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                }
             }
-            steps {
-                sh 'make publish'
-            }
-        }
+
     }
 }
