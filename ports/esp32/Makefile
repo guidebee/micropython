@@ -14,10 +14,10 @@ FROZEN_MPY_DIR = modules
 # include py core make definitions
 include $(TOP)/py/py.mk
 
-PORT ?= /dev/ttyUSB0
+PORT ?= /dev/cu.SLAB_USBtoUART
 BAUD ?= 460800
 FLASH_MODE ?= dio
-FLASH_FREQ ?= 40m
+FLASH_FREQ ?= 26m
 FLASH_SIZE ?= 4MB
 CROSS_COMPILE ?= xtensa-esp32-elf-
 OBJDUMP = $(CROSS_COMPILE)objdump
