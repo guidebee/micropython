@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bab6ffc-685c-4547-b201-461736f175d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mpy-cross/Jenkinsfile" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/ports/zephyr/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Jenkinsfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="399">
+              <caret line="19" column="70" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -195,7 +195,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,17 +204,13 @@
             </path>
             <path>
               <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="micropython" type="462c0819:PsiDirectoryNode" />
-              <item name="mpy-cross" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NONE" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,7 +308,8 @@
       <workItem from="1563802899327" duration="419000" />
       <workItem from="1563859866938" duration="58000" />
       <workItem from="1563859939136" duration="758000" />
-      <workItem from="1563882461991" duration="840000" />
+      <workItem from="1563882461991" duration="1389000" />
+      <workItem from="1563884059606" duration="272000" />
     </task>
     <task id="LOCAL-00001" summary="add screens">
       <created>1562655518768</created>
@@ -385,18 +381,32 @@
       <option name="project" value="LOCAL" />
       <updated>1563883208587</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="test jenkins">
+      <created>1563883413571</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1563883413571</updated>
+    </task>
+    <task id="LOCAL-00012" summary="test jenkins">
+      <created>1563883610965</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1563883610965</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58746000" />
+    <option name="totallyTimeSpent" value="59567000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1633" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8887574" visible="true" weight="0.17976116" />
-      <window_info id="Structure" order="1" sideWeight="0.11124261" side_tool="true" visible="true" weight="0.17976116" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.88757396" visible="true" weight="0.17976116" />
+      <window_info id="Structure" order="1" sideWeight="0.112426035" side_tool="true" visible="true" weight="0.17976116" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
@@ -411,6 +421,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="CMake" order="12" visible="true" weight="0.09625668" />
+      <window_info anchor="right" id="Jenkins X" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -678,6 +689,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mpy-cross/Jenkinsfile" />
     <entry file="file://$PROJECT_DIR$/ports/stm32/modules/mpc/terminals.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2856">
@@ -736,17 +748,10 @@
     <entry file="file://$PROJECT_DIR$/py/runtime.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/mpy-cross/Jenkinsfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="399">
+          <caret line="19" column="70" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
         </state>
       </provider>
     </entry>
