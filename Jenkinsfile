@@ -17,7 +17,7 @@ pipeline {
 
     post {
             success {
-                archiveArtifacts artifacts: 'build-PYBV11/firmware.dfu', fingerprint: true
+                archiveArtifacts artifacts: 'ports/stm32/build-PYBV11/firmware.dfu', fingerprint: true
 
             }
         }
