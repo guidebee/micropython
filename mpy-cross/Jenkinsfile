@@ -4,10 +4,10 @@ pipeline {
 
 
     stages {
-        stage('build') {
+        stage('build-mpy-cross') {
                 steps {
                     echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                    sh "make"
+                    sh "cd mpy-cross & make "
                 }
             }
 
