@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bab6ffc-685c-4547-b201-461736f175d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mpy-cross/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/mpy-cross/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mpy-cross/Jenkinsfile" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/ports/zephyr/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,20 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Jenkinsfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mpy-cross/Jenkinsfile">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -188,8 +179,8 @@
         <option value="$PROJECT_DIR$/ports/stm32/factoryreset.c" />
         <option value="$PROJECT_DIR$/ports/stm32/moduos.c" />
         <option value="$PROJECT_DIR$/py/makeversionhdr.py" />
-        <option value="$PROJECT_DIR$/Jenkinsfile" />
         <option value="$PROJECT_DIR$/mpy-cross/Jenkinsfile" />
+        <option value="$PROJECT_DIR$/Jenkinsfile" />
       </list>
     </option>
   </component>
@@ -322,7 +313,7 @@
       <workItem from="1563802899327" duration="419000" />
       <workItem from="1563859866938" duration="58000" />
       <workItem from="1563859939136" duration="758000" />
-      <workItem from="1563882461991" duration="679000" />
+      <workItem from="1563882461991" duration="840000" />
     </task>
     <task id="LOCAL-00001" summary="add screens">
       <created>1562655518768</created>
@@ -387,11 +378,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563882829659</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="test jenkins">
+      <created>1563883208587</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1563883208587</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58585000" />
+    <option name="totallyTimeSpent" value="58746000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1633" height="1027" extended-state="6" />
@@ -738,17 +736,17 @@
     <entry file="file://$PROJECT_DIR$/py/runtime.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Jenkinsfile">
+    <entry file="file://$PROJECT_DIR$/mpy-cross/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mpy-cross/Jenkinsfile">
+    <entry file="file://$PROJECT_DIR$/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
