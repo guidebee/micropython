@@ -69,26 +69,27 @@ ETX = 0x03
 
 class Terminal(IOBase):
 
-    def __init__(self, columns, rows, uart_id, background=BLUE, foreground=YELLOW):
+    def __init__(self, columns, rows, uart_id, background=BLUE, foreground=YELLOW, enable_cursor=True):
         self.uart = UART(uart_id, 115200)
         self.key_buffer = deque((), 10)
         self.screen = Screen(columns, rows)
         self.screen.dirty.clear()
         self.screen_buffer = [[None] * columns for _ in range(rows)]
         self.input_stream = Stream(self.screen)
-        lcd = LCD(rate=42000000)
-        self.lcd = lcd.initCh(color=foreground, font='Amstrad_8', scale=1)
+        self.lcd_device = LCD(rate=42000000)
+        self.lcd = self.lcd_device.initCh(color=foreground, font='Amstrad_8', scale=1)
         self.foreground = foreground
         self.background = background
         self.lcd.fillMonocolor(background)
         self.rows = rows
         self.columns = columns
         self.show_cursor = True
-        self.cursor_delay = 200
+        self.cursor_delay = 20
         self.last_draw_cursor_time = time.ticks_ms()
         self.last_cursor_x = 0
         self.last_cursor_y = 0
         self.draw_cursor_in_progress = False
+        self.enable_cursor = enable_cursor
 
     def __del__(self):
         self.close()
@@ -110,8 +111,9 @@ class Terminal(IOBase):
 
     def readinto(self, buf):
         key_input = self.read()
-        self.draw_cursor()
-        self._gcCollect()
+        if self.enable_cursor:
+            self.draw_cursor()
+            self._gcCollect()
         if key_input is not None:
             bytes_key_input = str.encode(key_input)
             count = len(key_input)
@@ -121,20 +123,29 @@ class Terminal(IOBase):
             buf[0] = self.key_buffer.popleft()
             return 1
         except:
-            pass
+            return None
 
     @micropython.viper
     def _gcCollect(self):
         gc.collect()
 
+    def show_cursor(self):
+        self.enable_cursor = True
+
+    def hide_cursor(self):
+        self.enable_cursor = False
+
+    def clear_screen(self):
+        self.screen.reset()
+        self.screen.dirty.clear()
+        self.last_cursor_x = 0
+        self.last_cursor_y = 0
+        self.lcd.fillMonocolor(self.background)
+
     def write(self, buf):
         try:
             if self.screen.cursor.y == self.rows - 1:
-                self.screen.reset()
-                self.screen.dirty.clear()
-                self.last_cursor_x = 0
-                self.last_cursor_y = 0
-                self.lcd.fillMonocolor(self.background)
+                self.clear_screen()
             str_buf = str(buf, 'utf-8')
             if str_buf == "\x1b[K":
                 self.clear_line(self.screen.cursor.x * 8,
@@ -145,6 +156,13 @@ class Terminal(IOBase):
             self.update_screen()
         except:
             pass
+
+    def set_color(self, background=BLUE, foreground=YELLOW):
+        self.background = background
+        if foreground != self.foreground:
+            self.lcd = self.lcd_device.initCh(color=foreground, font='Amstrad_8', scale=1)
+        self.foreground = foreground
+        self.clear_screen()
 
     def clear_line(self, x, y):
         self.lcd.drawHline(x, y, 320, self.background, 8)
@@ -160,7 +178,7 @@ class Terminal(IOBase):
                         offset = 2
                     else:
                         offset = 0
-                    self.lcd.drawHline(x + i * 8, y, 8, self.background, 8)
+                    # self.lcd.drawHline(x + i * 8, y, 8, self.background, 8)
                     self.lcd.printChar(text[i], x + i * 8 + offset, y)
 
     def update_screen(self):
@@ -254,7 +272,7 @@ class Terminal(IOBase):
                     self.lcd.drawHline(self.screen.cursor.x * 8 + 1,
                                        self.screen.cursor.y * 8 + 7, 8, self.foreground,
                                        1)
-                    time.sleep_ms(500)
+                    time.sleep_ms(100)
 
                     self.draw_text(self.screen_buffer[self.screen.cursor.y][self.screen.cursor.x],
                                    self.screen.cursor.x * 8 + 1,
